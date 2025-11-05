@@ -6,7 +6,6 @@ public class ListGraph<T> implements Graph<T> {
     // Stores each node and its set of connected edges
     private HashMap<T, HashSet<Edge<T>>> nodes = new HashMap<>();
 
-    // Adds a node to the graph if it doesn't already exist
     public void add(T node1) {
         nodes.putIfAbsent(node1, new HashSet<>());
     }
@@ -23,7 +22,6 @@ public class ListGraph<T> implements Graph<T> {
             nodes.get(nodeConnected).removeIf(e -> e.getDestination().equals(node));
         }
 
-        // Remove the node itself
         nodes.remove(node);
     }
 
@@ -74,7 +72,6 @@ public class ListGraph<T> implements Graph<T> {
         }
     }
 
-    // Returns a set of all nodes in the graph
     public Set<T> getNodes() {
         return new HashSet<>(nodes.keySet());
     }
@@ -87,7 +84,6 @@ public class ListGraph<T> implements Graph<T> {
         return Collections.unmodifiableCollection(nodes.get(node));
     }
 
-    // Returns the edge between two nodes if it exists, otherwise null
     public Edge<T> getEdgeBetween(T node1, T node2) {
         if (!nodes.containsKey(node1) || !nodes.containsKey(node2)) {
             throw new NoSuchElementException("One or both of the nodes not found in graph");
@@ -109,7 +105,6 @@ public class ListGraph<T> implements Graph<T> {
         return sb.toString();
     }
 
-    // Returns true if there is a path from 'from' to 'to'
     public boolean pathExists(T from, T to) {
         if (!nodes.containsKey(from) || !nodes.containsKey(to)) {
             return false;
